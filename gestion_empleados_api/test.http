@@ -1,0 +1,9 @@
+POST http://localhost:3000/api/empleados
+Content-Type: application/json
+
+{
+  "nombre": "dulce",
+  "apellido": "FELIPE",
+  "id_area": 7,
+  "correo":"dulce.felipe@omodaboca.mx"
+}

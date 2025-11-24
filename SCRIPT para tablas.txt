@@ -1,0 +1,50 @@
+USUARIOS
+root
+Contraseña:
+D6M7NR98XD3C*50
+_______________
+
+backup_user
+Contraseña:
+BackupPassSegura!
+
+SCRIPT PARA VALIDAR LA DB.
+
+## Verificar tablas, estructura y datos en gestion_empleados ##
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+& "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p -D gestion_empleados -e @"
+SHOW TABLES;
+DESCRIBE areas;
+DESCRIBE empleados;
+DESCRIBE equipos;
+DESCRIBE usuarios_sistema;
+SELECT * FROM areas;
+SELECT * FROM empleados;
+SELECT * FROM equipos;
+SELECT * FROM usuarios_sistema;
+"@
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+##Verificación de tablas por usuario backup##
+##Verificación rápida con backup_user##
+
+& "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u backup_user -p -D gestion_empleados -e @"
+SHOW TABLES;
+DESCRIBE areas;
+DESCRIBE empleados;
+DESCRIBE equipos;
+DESCRIBE usuarios_sistema;
+SELECT * FROM areas;
+SELECT * FROM empleados;
+SELECT * FROM equipos;
+SELECT * FROM usuarios_sistema;
+"@
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+##SCRIPT PARA HACER EL RESPALDO DE LA DB.##
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+& "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqldump.exe" -u root -p gestion_empleados --routines --triggers --events --single-transaction --quick --result-file="C:\backups\gestion_empleados_$(Get-Date -Format yyyyMMdd_HHmmss).sql"
+
